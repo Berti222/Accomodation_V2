@@ -127,14 +127,11 @@ CREATE TABLE Meal
 	Price money NULL,
 	ServiceDate date NULL,
 	GuestId int NULL,
-	FoodId int NULL,
 	ReservationId int NULL,
 
 	CONSTRAINT PK_Meal PRIMARY KEY (ID),
 	CONSTRAINT FK_Meal_Guest FOREIGN KEY (GuestId)
 		REFERENCES Guest (ID),
-	CONSTRAINT FK_Meal_Food FOREIGN KEY (FoodId)
-		REFERENCES Food (Id),
 	CONSTRAINT FK_Meal_Reservation FOREIGN KEY (ReservationId)
 		REFERENCES Reservation (Id),
 	CONSTRAINT chk_Price_GreaterThanZero CHECK (Price > 0)

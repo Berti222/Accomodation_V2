@@ -7,7 +7,7 @@ public partial class RoomPrice
 {
     public int Id { get; set; }
 
-    public string? Name { get; set; }
+    public string Name { get; set; }
 
     public decimal? Price { get; set; }
 
@@ -21,5 +21,5 @@ public partial class RoomPrice
 
     public int? RoomTypeId { get; set; }
 
-    public virtual RoomType? RoomType { get; set; }
+    public virtual RoomType RoomType { get; set; }
 }

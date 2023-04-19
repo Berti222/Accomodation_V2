@@ -11,7 +11,7 @@ public partial class Room
 
     public int? RoomTypeId { get; set; }
 
-    public virtual RoomType? RoomType { get; set; }
+    public virtual RoomType RoomType { get; set; }
 
     public virtual ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();
 

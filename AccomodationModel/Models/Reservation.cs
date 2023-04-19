@@ -19,7 +19,7 @@ public partial class Reservation
 
     public decimal? Discount { get; set; }
 
-    public string? Type { get; set; }
+    public string Type { get; set; }
 
     public short? NumberOfAdoult { get; set; }
 
