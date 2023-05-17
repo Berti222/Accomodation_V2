@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccomodationModel", "AccomodationModel\AccomodationModel.csproj", "{16B42C4D-C46D-4086-8EF1-1E627BDD0685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccomodationWebAPI", "AccomodationWebAPI\AccomodationWebAPI.csproj", "{EEB350FC-0693-4279-887D-66709FA34B57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccomodationWebAPI", "AccomodationWebAPI\AccomodationWebAPI.csproj", "{EEB350FC-0693-4279-887D-66709FA34B57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccomodationWepApiTests", "AccomodationWepApiTests\AccomodationWepApiTests.csproj", "{C8B51C06-0092-4499-8DE3-618C486228F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EEB350FC-0693-4279-887D-66709FA34B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEB350FC-0693-4279-887D-66709FA34B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEB350FC-0693-4279-887D-66709FA34B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B51C06-0092-4499-8DE3-618C486228F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B51C06-0092-4499-8DE3-618C486228F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B51C06-0092-4499-8DE3-618C486228F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B51C06-0092-4499-8DE3-618C486228F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
