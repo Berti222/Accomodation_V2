@@ -119,5 +119,27 @@ namespace AccomodationWepApiTests
             Assert.Equal(pageSize, dto.PageSize);
             Assert.Equal(currentPage, dto.CurrentPage);
         }
+
+        [Fact]
+        public void Create_GetTheFirstPageWhenThereIsJustOneElementInTheDB_ShowTheOneElementAndSetTheNextAndPrevPageToZero()
+        {
+
+            List<object> objList = new()
+            {
+                new()
+            };
+            IPagingFactroy factory = new PagingFactroy();
+            int pageSize = 2;
+            int currentPage = 1;
+
+            var dto = factory.Create(objList, currentPage, pageSize);
+
+            Assert.NotNull(dto);
+            Assert.Equal(pageSize, dto.PageSize);
+            Assert.Equal(currentPage, dto.CurrentPage);
+            Assert.True(1 == dto.Items.Count());
+            Assert.True(dto.NextPage == 0);
+            Assert.True(dto.PreviousPage == 0);
+        }
     }
 }

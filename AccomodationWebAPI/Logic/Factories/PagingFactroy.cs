@@ -17,7 +17,7 @@ namespace AccomodationWebAPI.Logic.Factories
             result.PageSize = pageSize;
             result.TotalItems = values.Count;
 
-            int numberOfItemToScip = pageNumber * pageSize;
+            int numberOfItemToScip = (pageNumber - 1) * pageSize;
             result.Items = values.Skip(numberOfItemToScip).Take(pageSize).ToList();
 
             result.PreviousPage = GetPreviousPage(pageNumber);
