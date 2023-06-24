@@ -21,7 +21,7 @@ namespace AccomodationModel.AccomodationRepository
 
         public async Task UpdateAsync(T entity)
         {
-            await context.Set<T>().AddAsync(entity);
+            context.Set<T>().Update(entity);
         }
 
         public async void Delete(T entity)
@@ -42,17 +42,19 @@ namespace AccomodationModel.AccomodationRepository
         public async Task<T> GetByConditionAsync(Expression<Func<T, bool>> expression = null, params string[] includeProperties)
         {
             IQueryable<T> dbSet = context.Set<T>();
-            SetExpressionAndIncludeProperties(dbSet, expression, includeProperties);
-            return await dbSet.FirstOrDefaultAsync();
+            var result = SetExpressionAndIncludeProperties(dbSet, expression, includeProperties);
+            return await result.FirstOrDefaultAsync();
         }
 
-        private void SetExpressionAndIncludeProperties(IQueryable<T> dbSet, Expression<Func<T, bool>> expression, string[] includeProperties)
+        private IQueryable<T> SetExpressionAndIncludeProperties(IQueryable<T> dbSet, Expression<Func<T, bool>> expression, string[] includeProperties)
         {
+            IQueryable<T> result = dbSet;
             if (expression != null)
-                dbSet.Where(expression);
+                result = dbSet.Where(expression);
             if (includeProperties != null)
                 foreach (var includeProp in includeProperties)
-                    dbSet.Include(includeProp);
+                    result = dbSet.Include(includeProp);
+            return result;
         }
     }
 }
