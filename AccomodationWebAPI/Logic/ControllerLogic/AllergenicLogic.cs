@@ -18,9 +18,9 @@ namespace AccomodationWebAPI.Logic.ControllerLogic
         {
         }
 
-        public override async Task CreateAsync(AllergenicPostDTO entity)
+        public override async Task<AllergenicDTO> CreateAsync(AllergenicPostDTO entity)
         {
-            var enityWithTheSameName = await unitOfWork.AllergenicRepository.GetAllAsync(a => a.Name == entity.Name);
+            var enityWithTheSameName = await unitOfWork.AllergenicRepository.GetByConditionAsync(a => a.Name == entity.Name);
 
             if (enityWithTheSameName is not null) throw new HTTPStatusException("Entiy with the same name already exists.", HttpStatusCode.BadRequest);
 
@@ -28,6 +28,9 @@ namespace AccomodationWebAPI.Logic.ControllerLogic
             {
                 Allergenic entityForCreate = mapper.Map<AllergenicPostDTO, Allergenic>(entity);
                 await unitOfWork.AllergenicRepository.CreateAsync(entityForCreate);
+                await unitOfWork.SaveAsync();
+
+                return mapper.Map<Allergenic, AllergenicDTO>(entityForCreate);
             }
             catch (Exception ex)
             {

@@ -21,7 +21,7 @@ namespace AccomodationWebAPI.Logic.ControllerLogic
 
         public abstract Task<PagingDTO<TGetDTO>> GetAllAsync(int pageNumber, int pageSize);
         public abstract Task<TGetDTO> GetAsync(int id);
-        public abstract Task CreateAsync(TPostDTO entity);
+        public abstract Task<TGetDTO> CreateAsync(TPostDTO entity);
         public abstract Task DeleteAsync(int id);
         public abstract Task<TGetDTO> UpdateAsync(TPutDTO entity);
 
