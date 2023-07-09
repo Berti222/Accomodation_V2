@@ -20,6 +20,7 @@ builder.Services.AddDbContext<AccomodationContext>(
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IPagingFactroy, PagingFactroy>();
 builder.Services.AddScoped<AllergenicLogic>();
+builder.Services.AddScoped<RoomPriceLogic>();
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
