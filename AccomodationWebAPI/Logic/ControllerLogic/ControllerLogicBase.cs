@@ -29,6 +29,8 @@ namespace AccomodationWebAPI.Logic.ControllerLogic
         {
             foreach (var prop in typeof(T).GetProperties())
             {
+                if (prop.Name?.ToLower() == "id") continue;
+
                 var propertyValue = prop.GetValue(updateEntity);
                 if (propertyValue != null)
                     prop.SetValue(sourceEntity, propertyValue);
