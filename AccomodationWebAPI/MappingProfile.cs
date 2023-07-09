@@ -11,6 +11,7 @@ namespace AccomodationWebAPI
         public MappingProfile()
         {
             CreateAllergenicMapConfig();
+            CreateRoomPriceMapConfig();
         }
 
         private void CreateAllergenicMapConfig()
@@ -18,6 +19,13 @@ namespace AccomodationWebAPI
             CreateMap<Allergenic, AllergenicDTO>().ReverseMap();
             CreateMap<AllergenicPostDTO, Allergenic>();
             CreateMap<AllergenicPutDTO, Allergenic>();
+        }
+
+        private void CreateRoomPriceMapConfig()
+        {
+            CreateMap<RoomPrice, RoomPriceDTO>().ReverseMap();
+            CreateMap<RoomPricePostDTO, RoomPrice>();
+            CreateMap<RoomPricePutDTO, RoomPrice>();
         }
     }
 }
