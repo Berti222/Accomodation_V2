@@ -21,6 +21,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IPagingFactroy, PagingFactroy>();
 builder.Services.AddScoped<AllergenicLogic>();
 builder.Services.AddScoped<RoomPriceLogic>();
+builder.Services.AddScoped<RoomTypeLogic>();
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
