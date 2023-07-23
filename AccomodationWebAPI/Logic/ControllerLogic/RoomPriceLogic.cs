@@ -6,7 +6,6 @@ using AccomodationWebAPI.DTOs.GetDTOs;
 using AccomodationWebAPI.DTOs.PostDTOs;
 using AccomodationWebAPI.DTOs.PutDTOs;
 using AccomodationWebAPI.Logic.Factories;
-using AccomodationWebAPI.Logic.Helpers;
 using AutoMapper;
 using System.Net;
 
