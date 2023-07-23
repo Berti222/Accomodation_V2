@@ -11,7 +11,7 @@ namespace AccomodationWebAPI.Controllers
                                                                             where TPostDTO : class
                                                                             where TPutDTO : class
     {
-        private readonly TLogic logic;
+        protected readonly TLogic logic;
 
         public CustomControllerBase(TLogic logic)
         {
