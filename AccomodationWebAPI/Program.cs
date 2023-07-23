@@ -22,6 +22,7 @@ builder.Services.AddSingleton<IPagingFactroy, PagingFactroy>();
 builder.Services.AddScoped<AllergenicLogic>();
 builder.Services.AddScoped<RoomPriceLogic>();
 builder.Services.AddScoped<RoomTypeLogic>();
+builder.Services.AddScoped<EquipmentLogic>();
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
