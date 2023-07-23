@@ -1,4 +1,5 @@
 ﻿using AccomodationModel.Models;
+using AccomodationWebAPI.AutoMapper;
 using AccomodationWebAPI.DTOs.GetDTOs;
 using AccomodationWebAPI.DTOs.PostDTOs;
 using AccomodationWebAPI.DTOs.PutDTOs;
@@ -12,6 +13,7 @@ namespace AccomodationWebAPI
         {
             CreateAllergenicMapConfig();
             CreateRoomPriceMapConfig();
+            CreateRoomTypeMapConfig();
         }
 
         private void CreateAllergenicMapConfig()
@@ -26,6 +28,14 @@ namespace AccomodationWebAPI
             CreateMap<RoomPrice, RoomPriceDTO>().ReverseMap();
             CreateMap<RoomPricePostDTO, RoomPrice>();
             CreateMap<RoomPricePutDTO, RoomPrice>();
+        }
+
+        private void CreateRoomTypeMapConfig()
+        {
+            CreateMap<RoomType, RoomTypeDTO>().ForMember(dest => dest.Price, 
+                                                        opt => opt.MapFrom(new RoomTypeDTOResolver())).ReverseMap();
+            CreateMap<RoomTypePostDTO, RoomType>();
+            CreateMap<RoomTypePutDTO, RoomType>();
         }
     }
 }
