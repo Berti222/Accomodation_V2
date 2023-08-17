@@ -34,9 +34,9 @@ namespace AccomodationModel.AccomodationRepository
             IQueryable<T> dbSet = context.Set<T>();
             if (!tracked)
                 dbSet.AsNoTracking();
-            SetExpressionAndIncludeProperties(dbSet, expression, includeProperties);
+            dbSet = SetExpressionAndIncludeProperties(dbSet, expression, includeProperties);
 
-            return await context.Set<T>().ToListAsync();
+            return await dbSet.ToListAsync();
         }
 
         public virtual async Task<T> GetByConditionAsync(Expression<Func<T, bool>> expression = null, params string[] includeProperties)
@@ -48,13 +48,12 @@ namespace AccomodationModel.AccomodationRepository
 
         private IQueryable<T> SetExpressionAndIncludeProperties(IQueryable<T> dbSet, Expression<Func<T, bool>> expression, string[] includeProperties)
         {
-            IQueryable<T> result = dbSet;
             if (expression != null)
-                result = dbSet.Where(expression);
+                dbSet = dbSet.Where(expression);
             if (includeProperties != null)
                 foreach (var includeProp in includeProperties)
-                    result = dbSet.Include(includeProp);
-            return result;
+                    dbSet = dbSet.Include(includeProp);
+            return dbSet;
         }
     }
 }
