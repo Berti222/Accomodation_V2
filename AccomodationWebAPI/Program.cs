@@ -23,6 +23,7 @@ builder.Services.AddScoped<AllergenicLogic>();
 builder.Services.AddScoped<RoomPriceLogic>();
 builder.Services.AddScoped<RoomTypeLogic>();
 builder.Services.AddScoped<EquipmentLogic>();
+builder.Services.AddScoped<RoomLogic>();
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
