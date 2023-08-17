@@ -13,7 +13,7 @@ public partial class Room
 
     public virtual RoomType RoomType { get; set; }
 
-    public virtual ICollection<Equipment> Equipment { get; set; } = new List<Equipment>();
+    public virtual ICollection<Equipment> Equipments { get; set; } = new List<Equipment>();
 
     public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 }

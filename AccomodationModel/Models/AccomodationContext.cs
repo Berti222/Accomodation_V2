@@ -59,7 +59,7 @@ public partial class AccomodationContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            entity.HasMany(d => d.Rooms).WithMany(p => p.Equipment)
+            entity.HasMany(d => d.Rooms).WithMany(p => p.Equipments)
                 .UsingEntity<Dictionary<string, object>>(
                     "EquipmentRoom",
                     r => r.HasOne<Room>().WithMany()
