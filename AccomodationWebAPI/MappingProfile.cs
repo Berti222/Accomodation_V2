@@ -16,6 +16,7 @@ namespace AccomodationWebAPI
             CreateRoomTypeMapConfig();
             CreateEquipmentMapConfig();
             CreateRoomMapConfig();
+            CreateGuestMapConfig();
         }
 
         private void CreateAllergenicMapConfig()
@@ -52,6 +53,13 @@ namespace AccomodationWebAPI
             CreateMap<Room, RoomDTO>().ReverseMap();
             CreateMap<RoomPostDTO, Room>();
             CreateMap<RoomPutDTO, Room>();
+        }
+
+        private void CreateGuestMapConfig()
+        {
+            CreateMap<Guest, GuestDTO>().ReverseMap();
+            CreateMap<GuestPostDTO, Guest>();
+            CreateMap<GuestPutDTO, Guest>();
         }
     }
 }
