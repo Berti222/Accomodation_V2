@@ -1,7 +1,10 @@
 ﻿using AccomodationWebAPI.CustomExceptions;
 using AccomodationWebAPI.DTOs;
 using AccomodationWebAPI.Logic.ControllerLogic;
+using AccomodationWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System.Collections.Specialized;
 
 namespace AccomodationWebAPI.Controllers
 {
@@ -12,10 +15,12 @@ namespace AccomodationWebAPI.Controllers
                                                                             where TPutDTO : class
     {
         protected readonly TLogic logic;
+        protected readonly ILoggingHelper loggingHelper;
 
-        public CustomControllerBase(TLogic logic)
+        public CustomControllerBase(TLogic logic, ILoggingHelper loggingHelper)
         {
             this.logic = logic;
+            this.loggingHelper = loggingHelper;
         }
 
         [HttpGet]
@@ -26,15 +31,19 @@ namespace AccomodationWebAPI.Controllers
         {
             try
             {
+                loggingHelper.LogInformation("{ControlleName}/GetAll method calld with parameters: pageNumber: {pageNumber} and pageSize: {pageSize}"
+                                             , GetType().Name, pageNumber, pageSize);
                 var result = await logic.GetAllAsync(pageNumber, pageSize);
                 return Ok(result);
             }
             catch (HTTPStatusException ex)
             {
+                loggingHelper.LogHttpException(ex, GetType().Name, "GetAll");
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
             catch (Exception ex)
             {
+                loggingHelper.LogGeneralException(ex, GetType().Name, "GetAll");
                 return BadRequest(ex.Message);
             }
         }
@@ -47,15 +56,18 @@ namespace AccomodationWebAPI.Controllers
         {
             try
             {
+                Log.Information("{controllerName}/GetById/{id} called", GetType().Name, id);
                 var createdInstance = await logic.GetAsync(id);
                 return Ok(createdInstance);
             }
             catch (HTTPStatusException ex)
             {
+                loggingHelper.LogHttpException(ex, GetType().Name, "GetById");
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
             catch (Exception ex)
             {
+                loggingHelper.LogGeneralException(ex, GetType().Name, "GetById");
                 return StatusCode(500, ex.Message);
             }
         }
@@ -68,15 +80,19 @@ namespace AccomodationWebAPI.Controllers
         {
             try
             {
+                loggingHelper.LogObjectPassedAsParameter(GetType().Name, nameof(Create), postDTO);
                 var createdInstance = await logic.CreateAsync(postDTO);
+                loggingHelper.LogObjectReturnedAtCreateOrUpdate(GetType().Name, nameof(Create), createdInstance);
                 return CreatedAtAction(nameof(GetById), new { id = createdInstance.Id }, createdInstance);
             }
             catch (HTTPStatusException ex)
             {
+                loggingHelper.LogHttpException(ex, GetType().Name, "Create");
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
             catch (Exception ex)
             {
+                loggingHelper.LogGeneralException(ex, GetType().Name, "Create");
                 return StatusCode(500, ex.Message);
             }
         }
@@ -89,15 +105,18 @@ namespace AccomodationWebAPI.Controllers
         {
             try
             {
+                loggingHelper.LogInformation("{controller}/Delete method called with id {id}", GetType().Name, id);
                 await logic.DeleteAsync(id);
                 return NoContent();
             }
             catch (HTTPStatusException ex)
             {
+                loggingHelper.LogHttpException(ex, GetType().Name, "Delete");
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
             catch (Exception ex)
             {
+                loggingHelper.LogGeneralException(ex, GetType().Name, "Delete");
                 return StatusCode(500, ex.Message);
             }
         }
@@ -111,15 +130,19 @@ namespace AccomodationWebAPI.Controllers
         {
             try
             {
+                loggingHelper.LogObjectPassedAsParameter(GetType().Name, nameof(Update), putDTO);
                 var updatedInstance = await logic.UpdateAsync(putDTO);
+                loggingHelper.LogObjectReturnedAtCreateOrUpdate(GetType().Name, nameof(Update), updatedInstance);
                 return Ok(updatedInstance);
             }
             catch (HTTPStatusException ex)
             {
+                loggingHelper.LogHttpException(ex, GetType().Name, "Update");
                 return StatusCode((int)ex.StatusCode, ex.Message);
             }
             catch (Exception ex)
             {
+                loggingHelper.LogGeneralException(ex, GetType().Name, "Update");
                 return StatusCode(500, ex.Message);
             }
         }

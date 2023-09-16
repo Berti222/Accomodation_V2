@@ -2,6 +2,7 @@
 using AccomodationWebAPI.DTOs.PostDTOs;
 using AccomodationWebAPI.DTOs.PutDTOs;
 using AccomodationWebAPI.Logic.ControllerLogic;
+using AccomodationWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccomodationWebAPI.Controllers
@@ -10,7 +11,8 @@ namespace AccomodationWebAPI.Controllers
     [ApiController]
     public class EquipmentController : CustomControllerBase<EquipmentLogic, EquipmentDTO, EquipmentPostDTO, EquipmentPutDTO>
     {
-        public EquipmentController(EquipmentLogic logic) : base(logic)
+        public EquipmentController(EquipmentLogic logic, ILoggingHelper loggingHelper) 
+            : base(logic, loggingHelper)
         {
         }
     }

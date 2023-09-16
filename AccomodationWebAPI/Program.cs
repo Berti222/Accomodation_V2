@@ -2,7 +2,9 @@ using AccomodationModel.AccomodationRepository;
 using AccomodationModel.Models;
 using AccomodationWebAPI.Logic.ControllerLogic;
 using AccomodationWebAPI.Logic.Factories;
+using AccomodationWebAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<AccomodationContext>(
     options => options.UseSqlServer("ConnectionStrings:Accomodation"));
 
+builder.Services.AddSingleton<ILoggingHelper, LoggingHelper>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IPagingFactroy, PagingFactroy>();
 builder.Services.AddScoped<AllergenicLogic>();
@@ -27,6 +30,11 @@ builder.Services.AddScoped<RoomLogic>();
 builder.Services.AddScoped<GuestLogic>();
 
 builder.Services.AddSwaggerGen();
+
+Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .CreateBootstrapLogger();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
